@@ -1,0 +1,77 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    get_set_method_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
+        tags: [ serializer.normalizer ]
+#
+#    acme_api.event.jwt_created_listener:
+#        class: App\EventListener\JWTCreatedListener
+#        arguments: [ '@request_stack' ]
+#        tags:
+#            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
+
+#    acme_api.event.jwt_decoded_listener:
+#        class: App\EventListener\JWTDecodedListener
+#        arguments: [ '@request_stack' ]
+#        tags:
+#            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_decoded, method: onJWTDecoded }
+
+#    acme_api.event.jwt_authenticated_listener:
+#        class: App\EventListener\JWTAuthenticatedListener
+#        tags:
+#            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_authenticated, method: onJWTAuthenticated }
+
+#    acme_api.event.authentication_success_listener:
+#        class: App\EventListener\AuthenticationSuccessListener
+#        tags:
+#            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
+
+#    acme_api.event.authentication_failure_listener:
+#        class: App\EventListener\AuthenticationFailureListener
+#        tags:
+#            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_failure, method: onAuthenticationFailureResponse }
+
+#    acme_api.event.jwt_invalid_listener:
+#        class: App\EventListener\JWTInvalidListener
+#        tags:
+#            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_invalid, method: onJWTInvalid }
+
+#    acme_api.event.jwt_notfound_listener:
+#        class: App\EventListener\JWTNotFoundListener
+#        tags:
+#            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_not_found, method: onJWTNotFound }
+
+#    acme_api.event.jwt_expired_listener:
+#        class: App\EventListener\JWTExpiredListener
+#        tags:
+#            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_expired, method: onJWTExpired }
+
+#    acme_api.encoder.nixilla_jwt_encoder:
+#        class: App\Encoder\NixillaJWTEncoder
+
+#    app.custom_authenticator:
+#        class: App\Security\CustomAuthenticator
+#        parent: lexik_jwt_authentication.security.jwt_authenticator
